@@ -6,7 +6,7 @@ app.config(function($routeProvider) {
             templateUrl: "partials/item-list.html",
             controller:  "ItemListCtrl"
         })
-        .when("/items/details", {
+        .when("/items/:itemId", {
             templateUrl: "partials/item-details.html",
             controller:  "ItemViewCtrl"
         })

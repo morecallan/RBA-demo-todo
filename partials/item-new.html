@@ -1,5 +1,5 @@
 <!-- NEW ITEM ADD VIEW -->
-<h1>New To-Do</h1>
+<h1>{{title}}</h1>
 
 <form>
   <div class="form-group">
@@ -32,6 +32,6 @@
       <input type="text" class="form-control" placeholder="this, this, this" ng-model="newTask.dependencies"/>
     </label>
   </div>
-  <button class="btn btn-default" ng-click="addNewItem()">Submit</button>
+  <button class="btn btn-default" ng-click="addNewItem()">{{submitButtonText}}</button>
 </form>
 <!-- END OF NEW ITEM ADD VIEW -->

@@ -1,8 +1,34 @@
-app.factory("itemStorage", function($q, $http, firebaseURL){
+app.factory("itemStorage", function($q, $http, firebaseURL, authFactory){
+
+
+    var addNewItem = function(newItem){
+        let user = authFactory.getUser();                        
+        return $q(function(resolve, reject) {
+            $http.post(
+                firebaseURL + "items.json",
+                JSON.stringify({
+                    assignedTo: newItem.assignedTo,
+                    dependencies: newItem.dependencies,
+                    dueDate: newItem.dueDate,
+                    isCompleted: newItem.isCompleted,
+                    location: newItem.location,
+                    task: newItem.task,
+                    urgency: newItem.urgency,
+                    uid: user.uid
+                })
+            )
+            .success(
+                function(objectFromFirebase) {
+                    resolve(objectFromFirebase);
+                }
+            );
+        });
+    };
 
     var getItemList = function(){
+        let user = authFactory.getUser();               
         return $q(function(resolve, reject){
-          $http.get(`${firebaseURL}/items/.json`)
+          $http.get(`${firebaseURL}items/.json?orderBy="uid"&equalTo="${user.uid}"`)
             .success(function(itemObject){ 
                 var items = [];
                 Object.keys(itemObject).forEach(function(key){ //using the keys method on js's object. loops through the object and pulls out our keys and returns array of keys. for each of these keys
@@ -20,7 +46,7 @@ app.factory("itemStorage", function($q, $http, firebaseURL){
     var deleteItem = function(itemId){
         return $q(function(resolve, reject){
             $http
-            .delete(`${firebaseURL}/items/${itemId}.json`)
+            .delete(`${firebaseURL}items/${itemId}.json`)
             .success(function(objectFromFirebase){
                 resolve(objectFromFirebase);
             })
@@ -32,7 +58,7 @@ app.factory("itemStorage", function($q, $http, firebaseURL){
 
     var getSingleItem = function(itemId){
           return $q(function(resolve, reject){
-          $http.get(`${firebaseURL}/items/${itemId}.json`)
+          $http.get(`${firebaseURL}items/${itemId}.json`)
             .success(function(itemObject){ 
                 resolve(itemObject);
             })
@@ -43,9 +69,10 @@ app.factory("itemStorage", function($q, $http, firebaseURL){
     };
 
     var updateItem = function(itemId, newItem){
+        let user = authFactory.getUser();                        
         return $q(function(resolve, reject) {
             $http.put(
-                firebaseURL + "/items/" + itemId + ".json",
+                firebaseURL + "items/" + itemId + ".json",
                 JSON.stringify({
                     assignedTo: newItem.assignedTo,
                     dependencies: newItem.dependencies,
@@ -53,7 +80,8 @@ app.factory("itemStorage", function($q, $http, firebaseURL){
                     isCompleted: newItem.isCompleted,
                     location: newItem.location,
                     task: newItem.task,
-                    urgency: newItem.urgency
+                    urgency: newItem.urgency,
+                    uid: user.uid
                 })
             )
             .success(
@@ -65,9 +93,10 @@ app.factory("itemStorage", function($q, $http, firebaseURL){
     };
 
     var updateCompletedStatus = function(newItem){
+        let user = authFactory.getUser();                        
         return $q(function(resolve, reject) {
             $http.put(
-                firebaseURL + "/items/" + newItem.id + ".json",
+                firebaseURL + "items/" + newItem.id + ".json",
                 JSON.stringify({
                     assignedTo: newItem.assignedTo,
                     dependencies: newItem.dependencies,
@@ -75,7 +104,8 @@ app.factory("itemStorage", function($q, $http, firebaseURL){
                     isCompleted: newItem.isCompleted,
                     location: newItem.location,
                     task: newItem.task,
-                    urgency: newItem.urgency
+                    urgency: newItem.urgency,
+                    uid: user.uid
                 })
             )
             .success(
@@ -86,5 +116,5 @@ app.factory("itemStorage", function($q, $http, firebaseURL){
         });
     }; 
 
-    return {getItemList:getItemList, deleteItem: deleteItem, getSingleItem: getSingleItem, updateItem: updateItem, updateCompletedStatus: updateCompletedStatus};
+    return {getItemList:getItemList, deleteItem: deleteItem, getSingleItem: getSingleItem, updateItem: updateItem, updateCompletedStatus: updateCompletedStatus, addNewItem: addNewItem};
 });

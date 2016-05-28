@@ -1,4 +1,4 @@
-app.controller("ItemNewCtrl", function($scope, $http, $location){
+app.controller("ItemNewCtrl", function($scope, $http, $routeParams, $location, itemStorage, authFactory){
     $scope.title = "New Item";
     $scope.submitButtonText = "Add New Item";
 
@@ -9,26 +9,16 @@ app.controller("ItemNewCtrl", function($scope, $http, $location){
         assignedTo: "",
         location: "",
         urgency: "",
-        dependencies: ""
+        dependencies: "",
+        uid: ""
      };
 
-
-
     $scope.addNewItem = function() {
-        $http.post(
-            "https://callan-todo.firebaseio.com/items/.json", 
-            JSON.stringify({
-                task: $scope.newTask.task,
-                isCompleted: false,
-                dueDate: $scope.newTask.dueDate,
-                assignedTo: $scope.newTask.assignedTo,
-                location: $scope.newTask.location,
-                urgency: $scope.newTask.urgency,
-                dependencies: $scope.newTask.dependencies,
-            })
-        ).success(function(response){
-            $location.url("items/list");
-            $scope.newTask = "";
+        itemStorage.addNewItem($scope.newTask)
+        .then(function successCallback(response){
+            $location.url("/item/list");
         });
     };
+
+
 });

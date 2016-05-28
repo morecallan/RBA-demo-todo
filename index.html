@@ -16,7 +16,7 @@
 <body ng-app="TodoApp">
 
   <!-- BEGINNING OF NAV -->
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default" ng-controller="LoginCtrl">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -34,7 +34,8 @@
         <ul class="nav navbar-nav navbar-right" >
           <li><a ng-href="#/items/list">All Items</a></li>
           <li><a ng-href="#/items/new">New Item</a></li>
-          <li><a ng-href= "#/logout">Logout</a></li>
+          <li><a ng-href= "#/logout" ng-hide="hasUser">Logout</a></li>
+          <li><a ng-href= "#/login" ng-hide="!hasUser">Login</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -55,6 +56,9 @@
   <script src="lib/bower_components/angular/angular.min.js"></script>
     <!-- Angular Route: Latest compiled and minified JavaScript -->
   <script src="lib/bower_components/angular-route/angular-route.min.js"></script>
+  <!-- Firebase and Angularfire -->
+  <script src="lib/bower_components/firebase/firebase.js"></script>
+  <script src="lib/bower_components/angularfire/dist/angularfire.min.js"></script>
   <!-- Bootstrap: jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap: Latest compiled and minified JavaScript -->
@@ -62,9 +66,10 @@
   <!-- APP FIRST -->
   <script type="text/javascript" src="app/app.js"></script>
   <!-- FACTORIES SECOND -->
+  <script type="text/javascript" src="app/factories/AuthFactory.js"></script>
   <script type="text/javascript" src="app/factories/ItemFactory.js"></script>
   <!-- CONTROLLERS LAST -->
-  <script type="text/javascript" src="app/controllers/NavCtrl.js"></script>
+  <script type="text/javascript" src="app/controllers/LoginCtrl.js"></script>
   <script type="text/javascript" src="app/controllers/ItemViewCtrl.js"></script>
   <script type="text/javascript" src="app/controllers/ItemNewCtrl.js"></script>
   <script type="text/javascript" src="app/controllers/ItemListCtrl.js"></script>

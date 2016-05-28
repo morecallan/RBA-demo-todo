@@ -1,0 +1,78 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> MY TODO DEMO </title>
+  <!-- Bootstrap: Latest compiled and minified CSS -->
+  <link rel="stylesheet" type="text/css" href="lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
+</head>
+
+
+<body ng-app="TodoApp">
+
+  <!-- BEGINNING OF NAV -->
+  <nav class="navbar navbar-default" ng-controller="LoginCtrl">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> To-Do App</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right" >
+          <li><a ng-href="#/items/list">All Items</a></li>
+          <li><a ng-href="#/items/new">New Item</a></li>
+          <li><a ng-href= "#/logout" ng-hide="hasUser">Logout</a></li>
+          <li><a ng-href= "#/login" ng-hide="!hasUser">Login</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  <!-- END OF NAV BAR -->
+
+  
+
+    <!-- CONTAINER FOR VIEW AND NEW -->
+    <div class="col-xs-10 col-xs-offset-1 main-container">
+      <div class="col-xs-12" ng-view></div>
+    </div>
+    <!-- END OF CONTAINER FOR VIEW AND NEW -->
+  
+
+
+  <!-- Angular: Latest compiled and minified JavaScript -->
+  <script src="lib/bower_components/angular/angular.min.js"></script>
+    <!-- Angular Route: Latest compiled and minified JavaScript -->
+  <script src="lib/bower_components/angular-route/angular-route.min.js"></script>
+  <!-- Firebase and Angularfire -->
+  <script src="lib/bower_components/firebase/firebase.js"></script>
+  <script src="lib/bower_components/angularfire/dist/angularfire.min.js"></script>
+  <!-- Bootstrap: jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap: Latest compiled and minified JavaScript -->
+  <script src="lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- APP FIRST -->
+  <script type="text/javascript" src="app/app.js"></script>
+  <!-- FACTORIES SECOND -->
+  <script type="text/javascript" src="app/factories/AuthFactory.js"></script>
+  <script type="text/javascript" src="app/factories/ItemFactory.js"></script>
+  <!-- CONTROLLERS LAST -->
+  <script type="text/javascript" src="app/controllers/LoginCtrl.js"></script>
+  <script type="text/javascript" src="app/controllers/ItemViewCtrl.js"></script>
+  <script type="text/javascript" src="app/controllers/ItemNewCtrl.js"></script>
+  <script type="text/javascript" src="app/controllers/ItemListCtrl.js"></script>
+  <script type="text/javascript" src="app/controllers/ItemEditCtrl.js"></script>
+</body>
+</html>

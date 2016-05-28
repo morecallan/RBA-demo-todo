@@ -1,0 +1,62 @@
+<!-- ALL ITEMS VIEW -->
+<h1>To-Do List</h1>
+
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+    <div class="input-group">
+      <span class="input-group-btn">
+      <button class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
+      </span>
+      <input class="form-control" type="text" placeholder="Search for..." ng-model="searchText">
+    </div>
+  </div>
+</div>
+
+<h3>In Progress</h3>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="col-xs-1">Completed</div>
+    <div class="col-xs-6">Task</div>
+    <div class="col-xs-2">Due Date</div>
+    <div class="col-xs-2">Assigned To</div>
+    <div class="col-xs-1">Delete</div>
+  </div>
+</div>
+
+<div ng-repeat="todo in items | filter: searchText">
+  <div class="panel panel-default"  ng-hide="todo.isCompleted">
+    <div class="panel-body">
+      <div class="col-xs-1"><input type="checkbox" ng-model="todo.isCompleted" ng-change="inputChange(todo)"></div>
+      <div class="col-xs-6"><a ng-href="#/items/details/{{todo.id}}">{{todo.task}}</a></div>
+      <div class="col-xs-2">{{todo.dueDate}}</div>
+      <div class="col-xs-2">{{todo.assignedTo}}</div>
+      <div class="col-xs-1"><button class="btn btn-danger" ng-click="itemDelete(todo.id)"><i class="fa fa-trash" aria-hidden="true"></i></button></div>
+    </div>
+  </div>
+</div>
+
+<h3>In Progress</h3>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="col-xs-1">Completed</div>
+    <div class="col-xs-6">Task</div>
+    <div class="col-xs-2">Due Date</div>
+    <div class="col-xs-2">Assigned To</div>
+    <div class="col-xs-1"></div>
+  </div>
+</div>
+
+<div ng-repeat="todo in items | filter: {isCompleted: true}">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="col-xs-1"><input type="checkbox" ng-model="todo.isCompleted" ng-change="inputChange(todo)"></div>
+      <div class="col-xs-6"><a ng-href="#/items/details/{{todo.id}}">{{todo.task}}</a></div>
+      <div class="col-xs-2">{{todo.dueDate}}</div>
+      <div class="col-xs-2">{{todo.assignedTo}}</div>
+      <div class="col-xs-1"></div>
+    </div>
+  </div>
+</div>
+<!-- END OF ALL ITEMS VIEW -->

@@ -16,7 +16,6 @@ app.controller("ItemListCtrl", function($scope, $http, $location, itemStorage){
     $scope.inputChange = function(inputItem){
         itemStorage.updateCompletedStatus(inputItem).
         then(function(response){
-            
-        })
+        });
     };
 });

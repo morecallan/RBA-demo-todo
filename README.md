@@ -63,7 +63,7 @@ Install Packages
 *npm install
 *bower install
 3. cd .. (to root)
-
+  
 Serve Project
 *Go to: `https://www.npmjs.com/package/http-server` and install "http-server".  
 2. Navigate to the project folder in command line interface and type: `http-server -p 8888`  
